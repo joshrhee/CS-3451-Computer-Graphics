@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Assignment 4: Shaders</title>
+    <link rel="stylesheet" type="text/css" href="./assets/common.css" media="screen" />
+    <script src="./utils/throttle.js"></script>
+    <meta charset="UTF-8">
+</head>
+<body >
+    <div class="description">
+        Shaders, shaders everywhere!
+    </div>
+    <div>Pick a shader effect: 
+        <button id="effect1" class="button" onclick="onEffect1();">Checkerboard</button>		
+        <button id="effect2" class="button" onclick="onEffect2();">Swiss Cheese</button>		
+        <button id="effect3" class="button" onclick="onEffect3();">Orbit</button>		
+        <button id="effect4" class="button" onclick="onEffect4();">Effect 4</button>		
+    </div>
+           
+    <div>
+        <label for="number">Number (0..1): </label>
+        <input id="number" type="range" name="number" min="0" max="1" value="0.2" step="0.05" >
+    </div>
+    <div id="drawing"></div>
+    <div>
+        <p id="prob1">
+            <span style="display: block;">1. Checkerboard:</span> 
+            <span style="display: block;">First, app.ts will pass the input slider's value. To convert the number of squares within the [u,v] range of [0...1,0...1] to [5...20,5...20], we use formula "numberOfSquares" = floor(inputSliderValue * 15 + 5).</span> 
+            <span style="display: block;">Once we get the number of squares, we subtract x coordiate by y coordinate like "xSubY" = floor(v_texcoord.x * numOfSquares) - floor(v_texcoord.y * numOfSquares) and check that total value is even number or odd number. </span> 
+            <span style="display: block;">If the xSubY is even number, then we color the Checkerboard black, otherwise white, so we can color black and white in zigzag pattern.</span> 
+        </p> 
+
+        <p id="prob2">
+            <span style="display: block;">2. Swiss Chees:</span> 
+            <span style="display: block;">First, app.ts will pass the input slider's value. Then, we use the slider value times 0.2 and use this value for our circle's radius.</span> 
+            <span style="display: block;">Once we get the circle's radius, we set some circles' center position. I set up 9 circle's center position. </span> 
+            <span style="display: block;">Then check if the distance between circle's center position and texcoord, and if the distance is less than the circle's radius, this means our texcoord is inside of the circle, so we can discard it, so we can draw circles.</span> 
+        </p> 
+
+        <p id="Orbit">
+            <span style="display: block;">3. Orbit:</span> 
+            <span style="display: block;">First, app.ts will pass the time value. Then, we edit the position = vec3(position.x + cos(time) * radius, position.y + sin(time) * radius, position.z), so my object is moving a circle shape.</span> 
+            <span style="display: block;">I set up radius = 500, so my object makes a big circle shape.</span> 
+        </p> 
+            
+        
+    </div>
+
+<script type="module" src="./src/app.ts"></script>
+</body>
+</html>
